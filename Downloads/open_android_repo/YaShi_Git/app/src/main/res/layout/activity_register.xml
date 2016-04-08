@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar" />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/reg_page_et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_action_person"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="@string/user_name" />
+
+        <EditText
+            android:id="@+id/reg_page_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_action_accounts"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/reg_page_et_repeat_psw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_action_accounts"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="@string/repeat_psw"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/reg_page_bt_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@mipmap/ic_action_accept"
+            android:text="@string/reg_in" />
+
+
+        <Button
+            android:id="@+id/reg_page_bt_clean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@mipmap/ic_action_accept"
+            android:text="@string/clean" />
+
+    </LinearLayout>
+
+</LinearLayout>
