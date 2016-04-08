@@ -1,9 +1,16 @@
 package com.qual1ty.yashi_git.interactor;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
+
+import com.qual1ty.yashi_git.bean.User;
+import com.qual1ty.yashi_git.database.DataBaseHelper;
+import com.qual1ty.yashi_git.database.UserDao;
+
+import java.util.List;
 
 /**
  * Created by Tianci on 16/4/5.
@@ -15,8 +22,8 @@ public class LoginInteractorImpl implements LoginInteractor {
 //    private String psw_succ;
 //    private XmlResourceParser xmlParser;
 //
-    private static final String USERNAME = "username";
-    private static final String PSW = "password";
+    private static final String USERNAME = "admin";
+    private static final String PSW = "admin";
 
 //    public LoginInteractorImpl() {
 //        xmlParser = activity.getApplication().getResources().getXml(R.xml.user);
@@ -63,18 +70,35 @@ public class LoginInteractorImpl implements LoginInteractor {
 
 
     @Override
-    public void login(final String username, final String password, final OnLoginFinishedListener listener) {
+    public void login(final String username, final String password, final Context context, final OnLoginFinishedListener listener) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+
                 if (TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
                     listener.onUsernameError();
                 } else if (TextUtils.isEmpty(password) && !TextUtils.isEmpty(username)) {
                     listener.onPasswordError();
                 } else if (username.equals(USERNAME) && password.equals(PSW))
                     listener.onSuccess();
-                else {
-                    listener.onPasswordError();
+                else if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+                    DataBaseHelper helper = new DataBaseHelper(context);//参数是上下文
+                    UserDao userDao = new UserDao(context);
+                    List<User> users = userDao.query();
+                    for (User user : users) {
+                        if (user.username.equals(username)) {
+                            if (userDao.getUserPsw(username).equals(password))
+                                listener.onSuccess();
+                            else{
+                                listener.onPasswordError();
+                            }
+                        }else{
+                            listener.onUsernameError();
+                        }
+                    }
+                } else {
+                    listener.onUsernameError();
                 }
             }
         }, 500);

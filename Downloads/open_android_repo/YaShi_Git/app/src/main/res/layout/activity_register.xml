@@ -44,6 +44,16 @@
             android:hint="@string/repeat_psw"
             android:inputType="textPassword" />
 
+        <EditText
+            android:id="@+id/reg_page_et_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_action_accounts"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="@string/nickname"
+            android:inputType="textPassword" />
+
         <Button
             android:id="@+id/reg_page_bt_reg"
             android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.qual1ty.yashi_git.presenter;
 
 import android.content.Context;
+import android.widget.EditText;
 
 import com.qual1ty.yashi_git.activity.RegisterActivity;
 import com.qual1ty.yashi_git.interactor.RegisterInteractor;
@@ -21,11 +22,11 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
 
 
     @Override
-    public void registerAction(String name, String psw, Context context) {
+    public void registerAction(String name, String psw, String rePsw, String nickname, Context context) {
 
         if (view != null) {
             view.showProgress();
-            registerInteractor.register(name, psw, context, this);
+            registerInteractor.register(name, psw, rePsw, nickname, context, this);
         }
 
 
@@ -39,6 +40,11 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
     @Override
     public void backAction() {
         registerInteractor.back(view);
+    }
+
+    @Override
+    public void clean(EditText... views) {
+        registerInteractor.cleanViews(views);
     }
 
     @Override
@@ -63,6 +69,14 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
         if (view != null) {
             view.hideProgress();
             view.registerSuccessed();
+        }
+    }
+
+    @Override
+    public void onPswNotEquals() {
+        if (view != null) {
+            view.hideProgress();
+            view.rePswError();
         }
     }
 }

@@ -18,9 +18,10 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractorImpl.O
 
     @Override
     public void loginAction(String username, String psw) {
-        if (loginView != null)
+        if (loginView != null) {
             loginView.showProgress();
-        loginInteractorImpl.login(username, psw, this);
+            loginInteractorImpl.login(username, psw, loginView, this);
+        }
 
     }
 

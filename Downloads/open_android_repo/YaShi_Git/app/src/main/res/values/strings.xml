@@ -7,6 +7,7 @@
     <string name="user_name">username</string>
     <string name="password">password</string>
     <string name="repeat_psw">repeat password</string>
+    <string name="nickname">输入昵称</string>
 
     <string name="log_in">登陆</string>
     <string name="reg_in">注册</string>

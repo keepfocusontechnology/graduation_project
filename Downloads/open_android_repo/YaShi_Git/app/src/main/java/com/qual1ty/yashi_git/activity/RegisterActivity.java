@@ -2,7 +2,6 @@ package com.qual1ty.yashi_git.activity;
 
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.qual1ty.yashi_git.R;
 import com.qual1ty.yashi_git.presenter.RegisterPresenter;
@@ -19,21 +18,35 @@ import butterknife.OnClick;
  */
 public class RegisterActivity extends BaseActivity implements RegisterView {
 
-    @Bind(R.id.title_bar_back)
-    ImageButton ib_back;
+//    @Bind(R.id.title_bar_back)
+//    ImageButton ib_back;
+
     @OnClick(R.id.title_bar_back)
-    public void goback(){
+    public void goback() {
         presenter.backAction();
+    }
+
+    @OnClick(R.id.reg_page_bt_clean)
+    public void clean() {
+        presenter.clean(et_username, et_psw, et_repet_psw, et_nickname);
     }
 
     @Bind(R.id.reg_page_et_username)
     EditText et_username;
     @Bind(R.id.reg_page_et_password)
     EditText et_psw;
+    @Bind(R.id.reg_page_et_repeat_psw)
+    EditText et_repet_psw;
+    @Bind(R.id.reg_page_et_nickname)
+    EditText et_nickname;
 
     @OnClick(R.id.reg_page_bt_reg)
-    public void reg(){
-        presenter.registerAction(et_username.getText().toString(),et_psw.getText().toString(),this);
+    public void reg() {
+        presenter.registerAction(et_username.getText().toString(),
+                et_psw.getText().toString(),
+                et_repet_psw.getText().toString(),
+                et_nickname.getText().toString(),
+                this);
     }
 
     private RegisterPresenter presenter;
@@ -51,17 +64,22 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void setUserNameError() {
-        ToastUtil.toastShort(this,"用户名为空或者已存在！");
+        ToastUtil.toastShort(this, "用户名为空或者已存在！");
     }
 
     @Override
     public void setPasswordError() {
-        ToastUtil.toastShort(this,"密码不能为空！");
+        ToastUtil.toastShort(this, "密码不能为空！");
+    }
+
+    @Override
+    public void rePswError() {
+
     }
 
     @Override
     public void registerSuccessed() {
-        ToastUtil.toastShort(this,"注册成功！");
+        ToastUtil.toastShort(this, "注册成功！");
     }
 
     @Override

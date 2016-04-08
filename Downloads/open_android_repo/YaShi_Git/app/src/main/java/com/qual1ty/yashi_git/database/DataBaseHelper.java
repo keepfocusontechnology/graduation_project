@@ -14,10 +14,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public final static String DB_NAME = "userinfo";
 
     private final String CREATE_TABLE_USER = "create table if not exists usertable" +
-            "(id integer primary key autoincrement," +
-            "username string not null" +
-            "password string not null"+
-            "nickname string not null)";
+            "(id integer primary key autoincrement" +
+            ",username string not null" +
+            ",password string not null"+
+            ",nickname string not null)";
 
     private final String ADD_COLUMN = "alter table usertable " +
             "add column deleted integer default 0";

@@ -9,6 +9,8 @@ public interface RegisterView extends BaseView {
 
     void setPasswordError();
 
+    void rePswError();
+
     void registerSuccessed();
 
 }

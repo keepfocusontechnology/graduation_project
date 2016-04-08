@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.widget.EditText;
 
 import com.qual1ty.yashi_git.bean.User;
 import com.qual1ty.yashi_git.database.DataBaseHelper;
@@ -18,7 +19,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
 
     @Override
-    public void register(final String name, final String psw, final Context context, final OnRegisterListener listener) {
+    public void register(final String name, final String psw, final String rePsw, final String nickname, final Context context, final OnRegisterListener listener) {
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -26,12 +27,15 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                 User user = new User();
                 user.username = name;
                 user.psw = psw;
+                user.nickName = nickname;
 
                 UserDao userDao;
 
                 if (!TextUtils.isEmpty(name)) {
                     if (TextUtils.isEmpty(psw)) {
                         listener.onPasswordError();
+                    } else if (!psw.equals(rePsw)) {
+                        listener.onPswNotEquals();
                     } else {
                         DataBaseHelper helper = new DataBaseHelper(context);//参数是上下文
                         userDao = new UserDao(context);
@@ -73,5 +77,13 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     public void back(Activity activity) {
         if (activity != null)
             activity.finish();
+    }
+
+    @Override
+    public void cleanViews(EditText... editTexts) {
+        for (EditText view :
+                editTexts) {
+            view.setText(null);
+        }
     }
 }
