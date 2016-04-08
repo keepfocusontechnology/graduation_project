@@ -2,6 +2,7 @@ package com.qual1ty.yashi_git.interactor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -85,5 +86,10 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                 editTexts) {
             view.setText(null);
         }
+    }
+
+    @Override
+    public void jump2mainPage(Activity activity,Class<?> clazz) {
+        activity.startActivity(new Intent(activity,clazz));
     }
 }

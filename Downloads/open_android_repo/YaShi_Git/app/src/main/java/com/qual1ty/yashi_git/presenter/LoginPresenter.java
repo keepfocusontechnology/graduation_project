@@ -7,7 +7,7 @@ public interface LoginPresenter {
 
     void loginAction(String username,String psw);
 
-    void registerAction(Class<?> clazz);
+    void jumpPageAction(Class<?> clazz);
 
     void destory();
 

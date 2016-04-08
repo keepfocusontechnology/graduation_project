@@ -1,8 +1,10 @@
 package com.qual1ty.yashi_git.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.EditText;
 
+import com.qual1ty.yashi_git.MainActivity;
 import com.qual1ty.yashi_git.R;
 import com.qual1ty.yashi_git.presenter.RegisterPresenter;
 import com.qual1ty.yashi_git.presenter.RegisterPresenterImpl;
@@ -74,13 +76,22 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void rePswError() {
-
+        ToastUtil.toastShort(this, "两次输入密码不一致！");
     }
 
     @Override
     public void registerSuccessed() {
         ToastUtil.toastShort(this, "注册成功！");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                presenter.jumpMainPageAction(MainActivity.class);
+                manager.removeAll();
+            }
+        },1000);
+
     }
+
 
     @Override
     protected void onDestroy() {

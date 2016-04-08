@@ -4,12 +4,15 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.qual1ty.yashi_git.utils.ActivityManager;
+
 /**
  * Created by Tianci on 16/4/5.
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog dialog;
+    public ActivityManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         createProgressDialog();
         initViews(savedInstanceState);
-
+        manager = ActivityManager.getInstance();
+        manager.add(this);
     }
 
     protected abstract int getLayoutId();
@@ -46,6 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        manager.remove(this);
         dialog.dismiss();
         dialog = null;
     }

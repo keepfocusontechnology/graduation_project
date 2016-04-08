@@ -105,7 +105,7 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
-    public void register(Activity sre, Class<?> clazz) {
+    public void jump(Activity sre, Class<?> clazz) {
         sre.startActivity(new Intent(sre, clazz));
     }
 }

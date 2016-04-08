@@ -27,8 +27,8 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractorImpl.O
 
 
     @Override
-    public void registerAction(Class<?> clazz) {
-        loginInteractorImpl.register(loginView, clazz);
+    public void jumpPageAction(Class<?> clazz) {
+        loginInteractorImpl.jump(loginView, clazz);
     }
 
     @Override

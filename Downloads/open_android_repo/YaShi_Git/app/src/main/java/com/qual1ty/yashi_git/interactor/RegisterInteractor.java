@@ -24,4 +24,6 @@ public interface RegisterInteractor {
     void back(Activity activity);
 
     void cleanViews(EditText... editTexts);
+
+    void jump2mainPage(Activity srcActivity,Class<?> clazz);
 }

@@ -15,4 +15,6 @@ public interface RegisterPresenter {
     void backAction();
 
     void clean(EditText... views);
+
+    void jumpMainPageAction(Class<?> clazz);
 }

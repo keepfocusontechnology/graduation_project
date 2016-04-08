@@ -1,9 +1,11 @@
 package com.qual1ty.yashi_git.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.qual1ty.yashi_git.MainActivity;
 import com.qual1ty.yashi_git.R;
 import com.qual1ty.yashi_git.presenter.LoginPresenter;
 import com.qual1ty.yashi_git.presenter.LoginPresenterImpl;
@@ -33,7 +35,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     Button bt_reg;
     @OnClick(R.id.log_page_bt_reg)
     public void register(){
-        presenter.registerAction(RegisterActivity.class);
+        presenter.jumpPageAction(RegisterActivity.class);
     }
 
     @Bind(R.id.log_page_et_username)
@@ -81,6 +83,14 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void loginSuccessed() {
         ToastUtil.toastShort(this, "登陆成功");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                presenter.jumpPageAction(MainActivity.class);
+                manager.removeAll();
+            }
+        }, 500);
+
     }
 
 

@@ -48,6 +48,11 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
     }
 
     @Override
+    public void jumpMainPageAction(Class<?> clazz) {
+        registerInteractor.jump2mainPage(view,clazz);
+    }
+
+    @Override
     public void onUsernameError() {
         if (view != null) {
             view.hideProgress();

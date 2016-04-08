@@ -18,5 +18,5 @@ public interface LoginInteractor {
 
     void login(String username, String password,Context context, OnLoginFinishedListener listener);
 
-    void register(Activity srcActivity, Class<?> clazz);
+    void jump(Activity srcActivity, Class<?> clazz);
 }
