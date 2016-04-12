@@ -86,17 +86,22 @@ public class LoginInteractorImpl implements LoginInteractor {
                     DataBaseHelper helper = new DataBaseHelper(context);//参数是上下文
                     UserDao userDao = new UserDao(context);
                     List<User> users = userDao.query();
-                    for (User user : users) {
-                        if (user.username.equals(username)) {
-                            if (userDao.getUserPsw(username).equals(password))
-                                listener.onSuccess();
-                            else{
-                                listener.onPasswordError();
+                    if(users.size() > 0){
+                        for (User user : users) {
+                            if (user.username.equals(username)) {
+                                if (userDao.getUserPsw(username).equals(password))
+                                    listener.onSuccess();
+                                else{
+                                    listener.onPasswordError();
+                                }
+                            }else{
+                                listener.onUsernameError();
                             }
-                        }else{
-                            listener.onUsernameError();
                         }
+                    }else{
+                        listener.onUsernameError();
                     }
+
                 } else {
                     listener.onUsernameError();
                 }
