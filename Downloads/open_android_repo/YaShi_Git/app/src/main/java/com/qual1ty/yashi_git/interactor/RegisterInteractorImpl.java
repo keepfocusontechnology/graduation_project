@@ -18,6 +18,15 @@ import java.util.List;
  */
 public class RegisterInteractorImpl implements RegisterInteractor {
 
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
 
     @Override
     public void register(final String name, final String psw, final String rePsw, final String nickname, final Context context, final OnRegisterListener listener) {
@@ -46,6 +55,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                             listener.onUsernameError();
                         else {
                             userDao.insert(user);
+                            setUser(user);
                             listener.onSuccess();
                         }
                     }
@@ -89,7 +99,9 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     }
 
     @Override
-    public void jump2mainPage(Activity activity,Class<?> clazz) {
-        activity.startActivity(new Intent(activity,clazz));
+    public void navigate(Activity src, Class<?> clazz) {
+        Intent intent = new Intent(src, clazz);
+        intent.putExtra("user",getUser());
+        src.startActivity(intent);
     }
 }

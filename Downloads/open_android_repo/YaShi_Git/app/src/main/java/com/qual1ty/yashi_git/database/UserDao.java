@@ -141,4 +141,17 @@ public class UserDao {
         return psw;
     }
 
+    public String getUserNickname(String name) {
+        String psw = "";
+        String sql = "SELECT nickname From usertable Where username=?";
+        SQLiteDatabase db = helper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql, new String[]{name});
+        if (cursor.moveToNext()) {
+            psw = cursor.getString(0);
+        }
+        cursor.close();
+        db.close();
+        return psw;
+    }
+
 }

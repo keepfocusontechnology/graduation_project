@@ -2,6 +2,7 @@ package com.qual1ty.yashi_git.presenter;
 
 import com.qual1ty.yashi_git.activity.LoginActivity;
 import com.qual1ty.yashi_git.interactor.LoginInteractorImpl;
+import com.qual1ty.yashi_git.interactor.NavigationCommand;
 
 /**
  * Created by Tianci on 16/4/5.
@@ -10,10 +11,12 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractorImpl.O
 
     private LoginActivity loginView;
     private LoginInteractorImpl loginInteractorImpl;
+    private NavigationCommand navigationCommand;
 
     public LoginPresenterImpl(LoginActivity activity) {
         this.loginView = activity;
         this.loginInteractorImpl = new LoginInteractorImpl();
+        this.navigationCommand = loginInteractorImpl;
     }
 
     @Override
@@ -28,7 +31,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractorImpl.O
 
     @Override
     public void jumpPageAction(Class<?> clazz) {
-        loginInteractorImpl.jump(loginView, clazz);
+        navigationCommand.navigate(loginView, clazz);
     }
 
     @Override

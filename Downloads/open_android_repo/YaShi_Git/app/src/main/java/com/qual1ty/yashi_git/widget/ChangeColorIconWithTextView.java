@@ -80,7 +80,6 @@ public class ChangeColorIconWithTextView extends View {
 
         this.mTextPaint = new Paint();
         this.mTextPaint.setTextSize(this.mTextSize);
-        this.mTextPaint.setColor(0xff555555);
         this.mTextPaint.setColor(mTextColor);
         this.mTextPaint.getTextBounds(this.mText, 0, this.mText.length(), this.mTextBound);
     }
@@ -92,12 +91,14 @@ public class ChangeColorIconWithTextView extends View {
                 getPaddingRight(), getMeasuredHeight() - getPaddingTop() -
                 getPaddingBottom() - this.mTextBound.height());
 
+
         int left = getMeasuredWidth() / 2 - bitmapWidth / 2;
         int top = (getMeasuredHeight() - this.mTextBound.height()) / 2 - bitmapWidth /
                 2;
 
         this.mIconRect = new Rect(left, top, left + bitmapWidth, top + bitmapWidth);
     }
+
 
     protected void onDraw(Canvas canvas) {
         int alpha = (int) Math.ceil(255.0F * this.mAlpha);
@@ -184,4 +185,6 @@ public class ChangeColorIconWithTextView extends View {
             super.onRestoreInstanceState(state);
         }
     }
+
+
 }

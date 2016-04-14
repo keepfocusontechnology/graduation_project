@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.EditText;
 
 import com.qual1ty.yashi_git.activity.RegisterActivity;
+import com.qual1ty.yashi_git.interactor.NavigationCommand;
 import com.qual1ty.yashi_git.interactor.RegisterInteractor;
 import com.qual1ty.yashi_git.interactor.RegisterInteractorImpl;
 
@@ -14,10 +15,12 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
 
     private RegisterActivity view;
     private RegisterInteractorImpl registerInteractor;
+    private NavigationCommand navigationCommand;
 
     public RegisterPresenterImpl(RegisterActivity view) {
         this.view = view;
         registerInteractor = new RegisterInteractorImpl();
+        this.navigationCommand = registerInteractor;
     }
 
 
@@ -49,7 +52,7 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
 
     @Override
     public void jumpMainPageAction(Class<?> clazz) {
-        registerInteractor.jump2mainPage(view,clazz);
+        navigationCommand.navigate(view,clazz);
     }
 
     @Override

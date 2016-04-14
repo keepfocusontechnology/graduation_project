@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.qual1ty.yashi_git.bean.User;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by Tianci on 16/4/5.
  */
-public class LoginInteractorImpl implements LoginInteractor {
+public class LoginInteractorImpl implements LoginInteractor, NavigationCommand {
 
 
     //    private String username_succ;
@@ -24,6 +25,8 @@ public class LoginInteractorImpl implements LoginInteractor {
 //
     private static final String USERNAME = "admin";
     private static final String PSW = "admin";
+
+    private User user;
 
 //    public LoginInteractorImpl() {
 //        xmlParser = activity.getApplication().getResources().getXml(R.xml.user);
@@ -69,12 +72,19 @@ public class LoginInteractorImpl implements LoginInteractor {
 //    }
 
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     @Override
-    public void login(final String username, final String password, final Context context, final OnLoginFinishedListener listener) {
+    public void login(@NonNull final String username, @NonNull final String password, @NonNull final Context context, final OnLoginFinishedListener listener) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
 
                 if (TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
                     listener.onUsernameError();
@@ -86,19 +96,22 @@ public class LoginInteractorImpl implements LoginInteractor {
                     DataBaseHelper helper = new DataBaseHelper(context);//参数是上下文
                     UserDao userDao = new UserDao(context);
                     List<User> users = userDao.query();
-                    if(users.size() > 0){
+                    if (users.size() > 0) {
                         for (User user : users) {
                             if (user.username.equals(username)) {
-                                if (userDao.getUserPsw(username).equals(password))
+                                if (userDao.getUserPsw(username).equals(password)){
+                                    setUser(user);
                                     listener.onSuccess();
-                                else{
+                                }
+                                   
+                                else {
                                     listener.onPasswordError();
                                 }
-                            }else{
+                            } else {
                                 listener.onUsernameError();
                             }
                         }
-                    }else{
+                    } else {
                         listener.onUsernameError();
                     }
 
@@ -110,7 +123,10 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
-    public void jump(Activity sre, Class<?> clazz) {
-        sre.startActivity(new Intent(sre, clazz));
+    public void navigate(Activity src, Class<?> clazz) {
+        Intent intent = new Intent(src, clazz);
+        intent.putExtra("user",getUser());
+        src.startActivity(intent);
     }
+
 }

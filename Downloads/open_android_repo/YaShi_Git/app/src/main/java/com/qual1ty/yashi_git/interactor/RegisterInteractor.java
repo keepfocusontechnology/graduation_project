@@ -7,7 +7,7 @@ import android.widget.EditText;
 /**
  * Created by Tianci on 16/4/6.
  */
-public interface RegisterInteractor {
+public interface RegisterInteractor extends NavigationCommand{
 
     interface OnRegisterListener {
         void onUsernameError();
@@ -24,6 +24,4 @@ public interface RegisterInteractor {
     void back(Activity activity);
 
     void cleanViews(EditText... editTexts);
-
-    void jump2mainPage(Activity srcActivity,Class<?> clazz);
 }

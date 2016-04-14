@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewConfiguration;
 
+import com.qual1ty.yashi_git.bean.User;
 import com.qual1ty.yashi_git.fragment.TabFragment;
 import com.qual1ty.yashi_git.widget.ChangeColorIconWithTextView;
 
@@ -19,6 +20,10 @@ import java.util.List;
 
 public class MainActivity extends FragmentActivity
         implements ViewPager.OnPageChangeListener, View.OnClickListener {
+
+
+
+    private User user;
     private ViewPager mViewPager;
     private List<Fragment> mTabs = new ArrayList();
     private FragmentPagerAdapter mAdapter;
@@ -30,7 +35,6 @@ public class MainActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setOverflowShowingAlways();
         if (getActionBar() != null)
             getActionBar().setDisplayShowHomeEnabled(false);
@@ -107,19 +111,19 @@ public class MainActivity extends FragmentActivity
         resetOtherTabs();
 
         switch (v.getId()) {
-            case 2131230721:
+            case R.id.id_indicator_one:
                 ((ChangeColorIconWithTextView) this.mTabIndicator.get(0)).setIconAlpha(1.0F);
                 this.mViewPager.setCurrentItem(0, false);
                 break;
-            case 2131230722:
+            case R.id.id_indicator_two:
                 ((ChangeColorIconWithTextView) this.mTabIndicator.get(1)).setIconAlpha(1.0F);
                 this.mViewPager.setCurrentItem(1, false);
                 break;
-            case 2131230723:
+            case R.id.id_indicator_three:
                 ((ChangeColorIconWithTextView) this.mTabIndicator.get(2)).setIconAlpha(1.0F);
                 this.mViewPager.setCurrentItem(2, false);
                 break;
-            case 2131230724:
+            case R.id.id_indicator_four:
                 ((ChangeColorIconWithTextView) this.mTabIndicator.get(3)).setIconAlpha(1.0F);
                 this.mViewPager.setCurrentItem(3, false);
         }
